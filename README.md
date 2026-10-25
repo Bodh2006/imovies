@@ -22,12 +22,9 @@
 
 > Experience smooth seat selection, atomic race condition prevention, and digital QR boarding passes.
 
-```
-+---------------------------------------------------------------------------------+
-|  🎬 HERO PREMIERE   |   🎟️ CURVED SEAT GRID   |   ⚡ 5-MIN LOCK   |   🎫 QR PASS  |
-|  Live Showtimes     |   Recliner / Regular    |   Atomic MongoDB  |   Instant Entry |
-+---------------------------------------------------------------------------------+
-```
+<div align="center">
+  <img src="./demo_walkthrough.webp" alt="IMovies Demo Walkthrough" width="100%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
+</div>
 
 ---
 
