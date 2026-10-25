@@ -1,0 +1,27 @@
+{
+  "name": "imovies",
+  "version": "1.0.0",
+  "description": "IMovies - Online Movie Ticket Booking Platform (MERN Stack)",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev",
+    "seed": "cd server && npm run seed",
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "build": "cd client && npm run build"
+  },
+  "keywords": [
+    "mern",
+    "movie-booking",
+    "ticket-reservation",
+    "seat-locking",
+    "react",
+    "express",
+    "mongodb"
+  ],
+  "author": "Antigravity AI",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
