@@ -22,6 +22,7 @@
   "author": "Antigravity AI",
   "license": "ISC",
   "devDependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "concurrently": "^9.1.2"
   }
 }
