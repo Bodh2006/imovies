@@ -8,7 +8,7 @@
 [![Node.js](https://img.shields.io/badge/Backend-Node.js%2024-339933?style=for-the-badge&logo=nodedotjs)](https://nodejs.org)
 [![MongoDB](https://img.shields.io/badge/Database-MongoDB%208-47A248?style=for-the-badge&logo=mongodb)](https://www.mongodb.com)
 [![JWT Auth](https://img.shields.io/badge/Auth-Stateless%20JWT-000000?style=for-the-badge&logo=jsonwebtokens)](https://jwt.io)
-[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fparv55555%2Fimovies&env=MONGO_URI,JWT_SECRET)
 
 *A full-stack, enterprise-grade cinema ticketing system built according to strict Software Requirements Specifications (SRS v1.0). Features real-time atomic seat reservations, 5-minute countdown holds to prevent double-booking, multiplex show schedules, mock payment gateway, printable QR e-tickets, and an administrative control center.*
 
