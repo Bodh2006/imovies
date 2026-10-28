@@ -1,100 +1,95 @@
-<div align="center">
+# 🎬 IMovies — Full-Stack Cinema Ticketing & Reservation Engine
 
-# 🎬 IMovies
-### Online Movie Ticket Booking & Cinema Reservation Platform
+[![GitHub stars](https://img.shields.io/github/stars/Bodh2006/imovies?style=flat-square&color=6366f1)](https://github.com/Bodh2006/imovies/stargazers)
+[![License: MIT](https://img.shields.io/badge/License-MIT-06b6d4.svg?style=flat-square)](LICENSE)
+[![React 19](https://img.shields.io/badge/Frontend-React%2019%20%2B%20Vite-61dafb?style=flat-square&logo=react)](https://react.dev)
+[![Node.js](https://img.shields.io/badge/Backend-Node.js%2024%20%2B%20Express-22c55e?style=flat-square&logo=nodedotjs)](https://nodejs.org)
+[![MongoDB](https://img.shields.io/badge/Database-MongoDB%208-10b981?style=flat-square&logo=mongodb)](https://www.mongodb.com)
+[![Deploy on Vercel](https://img.shields.io/badge/Deploy-Vercel-black?style=flat-square&logo=vercel)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FBodh2006%2Fimovies&env=MONGO_URI,JWT_SECRET)
 
-[![MERN Stack](https://img.shields.io/badge/Stack-MERN%20(React%20%2B%20Express%20%2B%20Mongo)-e50914?style=for-the-badge&logo=react)](https://react.dev)
-[![Vite](https://img.shields.io/badge/Frontend-Vite%208-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev)
-[![Node.js](https://img.shields.io/badge/Backend-Node.js%2024-339933?style=for-the-badge&logo=nodedotjs)](https://nodejs.org)
-[![MongoDB](https://img.shields.io/badge/Database-MongoDB%208-47A248?style=for-the-badge&logo=mongodb)](https://www.mongodb.com)
-[![JWT Auth](https://img.shields.io/badge/Auth-Stateless%20JWT-000000?style=for-the-badge&logo=jsonwebtokens)](https://jwt.io)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fparv55555%2Fimovies&env=MONGO_URI,JWT_SECRET)
-
-*A full-stack, enterprise-grade cinema ticketing system built according to strict Software Requirements Specifications (SRS v1.0). Features real-time atomic seat reservations, 5-minute countdown holds to prevent double-booking, multiplex show schedules, mock payment gateway, printable QR e-tickets, and an administrative control center.*
-
-[Explore Features](#-features) • [System Architecture](#-system-architecture) • [Demo Walkthrough](#-demo-video--preview) • [Quickstart Guide](#-quickstart-guide) • [API Reference](#-rest-api-specification)
+> **IMovies** is a modern, high-throughput movie ticket booking web platform engineered to deliver cinema reservation experiences with zero seat-contention race conditions. Features atomic seat locking, interactive multiplex seat layouts, dynamic show scheduling, instant QR-code digital boarding passes, and a comprehensive theater administration suite.
 
 ---
 
+## 📑 Table of Contents
+- [Core Highlights](#-core-highlights)
+- [Interactive Preview](#-interactive-preview)
+- [Architecture & Tech Stack](#-architecture--tech-stack)
+- [Seat Lock & Concurrency Model](#-seat-lock--concurrency-model)
+- [Quick Start Guide](#-quick-start-guide)
+- [Default Demo Credentials](#-default-demo-credentials)
+- [REST API Endpoints](#-rest-api-endpoints)
+- [Deployment](#-deployment)
+- [Author & License](#-author--license)
+
+---
+
+## ⚡ Core Highlights
+
+### 🎟️ Customer Booking Experience
+- **Interactive Auditorium Projection Map**: Visualized curved auditorium seating featuring real-time state feedback (Available, In-Checkout Hold, Booked, and Selected).
+- **5-Minute Atomic Seat Isolation**: Selected seats are automatically reserved exclusively for 5 minutes with a live countdown timer, preventing race-condition conflicts across simultaneous buyers.
+- **Dynamic Showtimes & Filters**: Browse movies by release date, language, auditorium tech (*IMAX 3D, Dolby Atmos, 4DX*), and city.
+- **Contactless QR E-Tickets**: Generates scannable, cryptographically validated SVG QR codes with unique reference identifiers (`IMV-XXXX-XXXX`) ready for print or mobile presentation.
+- **Automated Cancellations**: Cancel tickets up to 2 hours before showtime with automated instant seat replenishment.
+
+### 💼 Cinema Operator & Admin Control
+- **Executive Revenue Metrics**: Real-time tracking of box-office gross receipts, reservation volume, occupancy rates, and top-grossing movie leaderboards.
+- **Movie Catalog Management**: Full CRUD controls with high-definition posters, synopsis, age classifications, and trailer links.
+- **Screen Collision Detection**: Automatic validation prevents scheduling overlapping shows in the same auditorium hall.
+- **Unified Transaction Ledger**: Comprehensive audit log of all bookings across every screen and customer.
+
+---
+
+## 📸 Interactive Preview
+
+<div align="center">
+  <img src="./demo_walkthrough.webp" alt="IMovies Interface Walkthrough" width="100%" style="border-radius: 8px; border: 1px solid #222;" />
 </div>
 
-## 📽️ Demo Video & Preview
-
-> Experience smooth seat selection, atomic race condition prevention, and digital QR boarding passes.
-
-<div align="center">
-  <img src="./demo_walkthrough.webp" alt="IMovies Demo Walkthrough" width="100%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
-</div>
-
 ---
 
-## ✨ Features
+## 🛠️ Architecture & Tech Stack
 
-### 🍿 For Movie-Goers (Customers)
-- **Cinematic Discovery**: Discover trending premieres, search by title, cast, or director, and filter by genre (*Action, Sci-Fi, Thriller, Animation, etc.*) and audio language.
-- **Multiplex Showtimes**: Filter shows by city (*Mumbai, Bengaluru, Delhi NCR*) and date with real-time auditorium formats (*IMAX Laser 3D, Dolby Atmos 4K, Onyx Cinema LED*).
-- **Interactive Seat Map**:
-  - Realistic curved cinema screen projection with ambient glow reflection.
-  - Color-coded seat states: 🟢 **Available**, 🔵 **Selected**, 🟠 **Locked (In Checkout)**, ⚪ **Booked**.
-  - Multi-tier seat categories (*Recliner, Premium, Regular*) with live running subtotal calculation.
-- **Atomic 5-Minute Seat Lock**:
-  - Automatically isolates chosen seats exclusively to the user's account for 5 minutes during checkout.
-  - Real-time countdown timer alerts the user if session is expiring.
-  - Released holds are automatically returned to public availability.
-- **Digital E-Tickets with QR Code**:
-  - Instant generation of unique references (`IMV-XXXX-XXXX`) and high-resolution SVG QR codes for contactless entrance.
-  - Printable / savable e-ticket boarding pass.
-- **Flexible Cancellations**:
-  - Cancel tickets up to 2 hours before showtime with automatic seat release and simulated refund.
-
-### 🛡️ For Cinema Operators (Admin Portal)
-- **Live Business Dashboard**: Aggregated gross box office revenue, ticket volume, active titles, and top-selling movies leaderboard.
-- **Catalogue CRUD**: Create, edit, and delete movies with high-res posters, official YouTube trailer embeds, runtimes, and ratings.
-- **Theatres & Auditoriums**: Configure multiplex venues and build custom row/seat grids.
-- **Schedule Overlap Prevention**: Algorithmically detects and blocks conflicting showtimes scheduled on the same auditorium screen.
-- **Transaction Ledger**: Filter and audit all customer reservations across the platform.
-
----
-
-## 🏗️ System Architecture
-
-```mermaid
-graph TD
-    Client["React 19 SPA (Vite + Bootstrap)"] -->|HTTPS / REST API| Server["Node.js & Express API Server"]
-    Server -->|JWT Auth Middleware| Auth["Stateless JWT / bcryptjs"]
-    Server -->|Atomic Conditionals| SeatLock["Seat Lock & Booking Service"]
-    Server -->|Periodic Cleanup Job| Cron["releaseExpiredLocks Job"]
-    Server -->|Mongoose ODM| DB[("MongoDB Database")]
-    
-    subgraph Data Models
-        DB --> Users["Users Collection"]
-        DB --> Movies["Movies Collection"]
-        DB --> Theatres["Theatres & Screens"]
-        DB --> Shows["Shows (Embedded Seats)"]
-        DB --> Bookings["Bookings Collection"]
-    end
+```
+[ Client: React 19 + Vite + Bootstrap ]
+                  │
+                  ▼ (RESTful JSON / Stateless JWT)
+[ Server: Express.js API + Middleware Pipeline ]
+                  │
+        ┌─────────┴─────────┐
+        ▼                   ▼
+ [ MongoDB Database ]  [ Scheduled Lock Expiry Worker ]
+ (Mongoose Schemas)    (Clears orphaned seat holds)
 ```
 
+| Layer | Technologies |
+| :--- | :--- |
+| **Frontend** | React 19, Vite 8, Lucide React, Bootstrap 5, Axios, Canvas Confetti |
+| **Backend** | Node.js 24, Express.js, Mongoose 8, JSON Web Tokens (JWT), Bcrypt.js, Helmet |
+| **Database** | MongoDB 8 with atomic conditional array updates and text indexing |
+| **Hosting** | Vercel Serverless Functions + Single Page Application Routing |
+
 ---
 
-## 🔒 Atomic Double-Booking Prevention
+## 🛡️ Seat Lock & Concurrency Model
 
-Concurrency safety is guaranteed at the database level using a single atomic conditional update:
+Seat booking conflicts are prevented at the database driver level using MongoDB atomic filters rather than memory-locking, making the architecture horizontally scalable across serverless containers:
 
 ```javascript
-// Atomically locks seats only if NONE of the requested seats are booked or held by another user
-const updateResult = await Show.updateOne(
+// Atomically acquires seat locks ONLY if no selected seat is already booked or held by an active session
+const lockResult = await Show.updateOne(
   {
     _id: showId,
     seats: {
       $not: {
         $elemMatch: {
-          seatId: { $in: seatIds },
+          seatId: { $in: requestedSeatIds },
           $or: [
             { status: 'booked' },
             {
               status: 'locked',
-              lockedBy: { $ne: userId },
+              lockedBy: { $ne: currentUserId },
               lockExpiresAt: { $gt: new Date() },
             },
           ],
@@ -105,123 +100,126 @@ const updateResult = await Show.updateOne(
   {
     $set: {
       'seats.$[elem].status': 'locked',
-      'seats.$[elem].lockedBy': userId,
-      'seats.$[elem].lockExpiresAt': lockExpiresAt,
+      'seats.$[elem].lockedBy': currentUserId,
+      'seats.$[elem].lockExpiresAt': calculatedExpiryDate,
     },
   },
   {
-    arrayFilters: [{ 'elem.seatId': { $in: seatIds } }],
+    arrayFilters: [{ 'elem.seatId': { $in: requestedSeatIds } }],
   }
 );
 ```
 
-Two simultaneous requests for the exact same seat will strictly result in **exactly one 200 OK and one 409 Conflict** (`unavailable: [...]`).
+When 50 simultaneous clients target the same seat, exactly **one** receives `200 OK` while the remaining **49** gracefully receive `409 Conflict`.
 
 ---
 
-## 🔑 Pre-Configured Test Credentials
+## 🚀 Quick Start Guide
 
-| Role | Email | Password | Privileges |
-| :--- | :--- | :--- | :--- |
-| **Cinema Admin** | `admin@imovies.com` | `Admin@12345` | Complete platform operator controls |
-| **Customer Demo** | `user@imovies.com` | `User@12345` | Ticket reservations, live seat map, e-tickets |
-
-*(Tip: 1-click login buttons are provided directly on the `/login` screen)*
-
----
-
-## 📋 REST API Specification
-
-### 🔐 Authentication & Users
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `POST` | `/api/auth/register` | Public | Register new customer account |
-| `POST` | `/api/auth/login` | Public | Login with email/password and obtain JWT token |
-| `GET` | `/api/auth/me` | User | Get current logged-in profile |
-| `PUT` | `/api/users/me` | User | Update profile name and password |
-
-### 🎬 Movies & Showtimes
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/movies` | Public | List movies with pagination, genre, language, status filters |
-| `GET` | `/api/movies/:id` | Public | Detailed movie synopsis, cast, rating |
-| `GET` | `/api/movies/:id/shows` | Public | Showtimes grouped by theatre & date |
-| `POST` | `/api/movies` | Admin | Create movie in catalogue |
-| `PUT` | `/api/movies/:id` | Admin | Update movie details |
-| `DELETE`| `/api/movies/:id` | Admin | Delete movie |
-
-### 🎟️ Seats & Bookings
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/shows/:id` | Public | Fetch live seat map for auditorium show |
-| `POST` | `/api/shows/:id/lock` | User | Atomically hold seats for 5 minutes |
-| `POST` | `/api/shows/:id/unlock` | User | Explicitly release held seats |
-| `POST` | `/api/bookings` | User | Confirm booking and execute mock payment |
-| `GET` | `/api/bookings/my` | User | Customer reservation history |
-| `GET` | `/api/bookings/:id` | User | View digital e-ticket with QR code |
-| `PUT` | `/api/bookings/:id/cancel`| User | Cancel booking (up to 2h before show) |
-
-### 📊 Admin Portal
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/admin/stats` | Admin | Box office revenue, top movies, booking stats |
-| `GET` | `/api/admin/bookings` | Admin | Filterable platform reservation ledger |
-| `POST` | `/api/shows` | Admin | Schedule show with collision/overlap validation |
-| `POST` | `/api/theatres` | Admin | Create multiplex venue |
-
----
-
-## 🚀 Quickstart Guide
-
-### 1. Clone the repository
+### 1. Clone & Enter Repository
 ```bash
-git clone https://github.com/parv55555/imovies.git
+git clone https://github.com/Bodh2006/imovies.git
 cd imovies
 ```
 
-### 2. Install dependencies
+### 2. Install Dependencies
 ```bash
 npm run install:all
 ```
 
-### 3. Setup environment variables
-Create `.env` inside `server/`:
+### 3. Environment Setup
+Configure `.env` in `server/`:
 ```env
 PORT=5000
-MONGO_URI=mongodb://localhost:27017/imovies
-JWT_SECRET=your_jwt_secret_key_here
+MONGO_URI=mongodb://127.0.0.1:27017/imovies
+JWT_SECRET=super_secret_jwt_key_2026
 JWT_EXPIRES_IN=1d
 CLIENT_URL=http://localhost:5173
 SEAT_LOCK_MINUTES=5
 ```
 
-Create `.env` inside `client/`:
+Configure `.env` in `client/`:
 ```env
 VITE_API_URL=http://localhost:5000/api
 ```
 
-### 4. Seed sample data
-Populates 9 blockbuster movies, 3 theatres, 6 screens, 36 shows, and demo accounts:
+### 4. Seed Database
+Injects 9 blockbuster movies, multi-tier auditoriums, active show schedules, and pre-seeded test accounts:
 ```bash
 npm run seed
 ```
 
-### 5. Run Concurrency Suite
+### 5. Launch Development Environment
 ```bash
-cd server
-node test/test-concurrency.js
-```
-
-### 6. Start Development Servers
-```bash
-# In project root:
 npm run dev
 ```
-
-- **Client App**: [http://localhost:5173](http://localhost:5173)
+- **Web App**: [http://localhost:5173](http://localhost:5173)
 - **API Server**: [http://localhost:5000](http://localhost:5000)
 
 ---
 
-## 📄 License
-This project is licensed under the MIT License.
+## 🔑 Default Demo Credentials
+
+| Role | Username / Email | Password | Access Rights |
+| :--- | :--- | :--- | :--- |
+| **Cinema Administrator** | `admin@imovies.com` | `Admin@12345` | Full administrative, movie catalogue, and revenue analytics controls |
+| **Standard Customer** | `user@imovies.com` | `User@12345` | Movie discovery, live seat booking, and digital ticket management |
+
+*(Convenient 1-click login buttons are also accessible on the `/login` screen)*
+
+---
+
+## 📡 REST API Endpoints
+
+### 🔐 Authentication & Profile
+| Endpoint | Method | Auth | Description |
+| :--- | :---: | :---: | :--- |
+| `/api/auth/register` | `POST` | Public | Register customer account |
+| `/api/auth/login` | `POST` | Public | Authenticate user & return JWT token |
+| `/api/auth/me` | `GET` | User | Fetch active session profile |
+| `/api/users/me` | `PUT` | User | Update personal details & credentials |
+
+### 🎬 Movies & Showtimes
+| Endpoint | Method | Auth | Description |
+| :--- | :---: | :---: | :--- |
+| `/api/movies` | `GET` | Public | List movies with genre, language, & search filters |
+| `/api/movies/:id` | `GET` | Public | Retrieve full movie details & cast |
+| `/api/movies/:id/shows` | `GET` | Public | Get shows grouped by theater & schedule |
+| `/api/movies` | `POST` | Admin | Create movie in platform catalog |
+| `/api/movies/:id` | `PUT` | Admin | Modify movie listing |
+| `/api/movies/:id` | `DELETE`| Admin | Delete movie entry |
+
+### 🎟️ Seat Reservation & Tickets
+| Endpoint | Method | Auth | Description |
+| :--- | :---: | :---: | :--- |
+| `/api/shows/:id` | `GET` | Public | Fetch live seat availability matrix |
+| `/api/shows/:id/lock` | `POST` | User | Atomically hold seats for 5 minutes |
+| `/api/shows/:id/unlock` | `POST` | User | Voluntarily release held seats |
+| `/api/bookings` | `POST` | User | Complete reservation with mock checkout |
+| `/api/bookings/my` | `GET` | User | Retrieve personal ticket history |
+| `/api/bookings/:id` | `GET` | User | View digital pass with QR code |
+| `/api/bookings/:id/cancel`| `PUT` | User | Cancel reservation & restore seats |
+
+### 📊 Admin Operations
+| Endpoint | Method | Auth | Description |
+| :--- | :---: | :---: | :--- |
+| `/api/admin/stats` | `GET` | Admin | Summary metrics (revenue, tickets, top movies) |
+| `/api/admin/bookings` | `GET` | Admin | Searchable audit ledger of all platform bookings |
+| `/api/shows` | `POST` | Admin | Add show with screen collision checking |
+| `/api/theatres` | `POST` | Admin | Register new multiplex venue & halls |
+
+---
+
+## ☁️ Deployment
+
+### Deploy to Vercel in 1 Click
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FBodh2006%2Fimovies&env=MONGO_URI,JWT_SECRET)
+
+Ensure `MONGO_URI` (MongoDB Atlas connection string) and `JWT_SECRET` are added to your Vercel Project Environment Variables.
+
+---
+
+## 📄 Author & License
+
+Developed and maintained by **[Bodh2006](https://github.com/Bodh2006)**.  
+Distributed under the **MIT License**.
